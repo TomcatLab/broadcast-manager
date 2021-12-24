@@ -58,14 +58,13 @@ class ProviderController extends Controller
 
     public function save($id = null,Request $request)
     {
-        if($request->input('logo')){
-            $request->validate([
-                'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
-            $logo = time().'.'.$request->logo->extension();
-            $request->logo->move(public_path('assets/images/providers/'), $logo);    
+        if($request->logo){
+            $logoName = strtolower(str_replace(" ","_",$request->input('title')));
+            $logoFullPath = 'assets/images/providers/'.$logoName."/".$logoName.".".$request->logo->extension();
+            $logoNewName = $logoName.".".$request->logo->extension();
+            $request->logo->move(public_path('assets/images/providers/'.$logoName."/"), $logoNewName); 
         }else{
-            $logo = null;
+            $logoFullPath = null;
         }
 
         if($id){
@@ -79,7 +78,7 @@ class ProviderController extends Controller
         $providers->feedurl = $request->input('feedurl');
         $providers->favicon = $request->input('favicon');
         $providers->country = $request->input('country');
-        $providers->logo = $logo ? 'assets/images/providers/'.$logo : null;
+        if($logoFullPath) $providers->logo = $logoFullPath ? $logoFullPath : null;
         $providers->keywords = $request->input('keywords');
         $providers->description = $request->input('description');
        
@@ -126,14 +125,14 @@ class ProviderController extends Controller
     
     public function saveCategory($providerId = null, $ProviderCategoryId = null, Request $request)
     {
-        if($request->input('image')){
-            $request->validate([
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
-            $image = time().'.'.$request->image->extension();
-            $request->image->move(public_path('assets/images/providers/category/'), $image);    
+        if($request->image){
+            $provider = Providers::where('id',$providerId)->first();
+            $providerName = strtolower(str_replace(" ","_",$provider->title));
+            $imageName = $providerId."_".$ProviderCategoryId."_".$providerName.".".$request->image->extension();
+            $imageFullPath = 'assets/images/providers/'.$providerName."/".$imageName;
+            $request->image->move(public_path('assets/images/providers/'.$providerName."/"), $imageName); 
         }else{
-            $image = null;
+            $imageFullPath = null;
         }
         if($ProviderCategoryId){
             $categories = ProviderCategories::where('id',$ProviderCategoryId)->first();
@@ -142,9 +141,11 @@ class ProviderController extends Controller
         }
         $categories->provider = $request->input('provider');
         $categories->category = $request->input('category');
+        $categories->key = $request->input('provider')."_".$request->input('category');
         $categories->feedurl = $request->input('feedurl');
         $categories->country = $request->input('country');
-        $categories->image = $image ? 'assets/images/providers/category/'.$image : null;
+        if($imageFullPath)
+            $categories->image = $imageFullPath ? $imageFullPath : null;
         $categories->keywords = $request->input('keywords');
         $categories->description = $request->input('description');
         $categories->save();

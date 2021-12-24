@@ -47,7 +47,11 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Image</label>
+                                    <label>Image
+                                        @if(!empty($providerCategory->image))
+                                        <a type="button" class="" data-toggle="modal" data-target=".bd-example-modal-xl">{{!empty($providerCategory->image) ? "Show Logo" : '' }}</a>
+                                        @endif
+                                    </label>
                                     <input type="file" name="image" class="file-upload-default">
                                     <div class="input-group col-xs-12">
                                         <input type="text" class="form-control file-upload-info" disabled="" placeholder="Upload Image">
@@ -69,6 +73,14 @@
                             </form>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <img src="{{!empty($providerCategory->image) ? url($providerCategory->image) : '' }}" alt="" width="100%">
                 </div>
             </div>
         </div>

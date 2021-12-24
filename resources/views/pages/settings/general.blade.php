@@ -20,6 +20,14 @@
                                 @csrf
                                 <input type="hidden" name="id" value="{{!empty($settings->id) ? $settings->id : '' }}">
                                 <div class="form-group">
+                                    <label for="title">Domain</label>
+                                    <input type="text" class="form-control" id="title" autocomplete="off" placeholder="Domain" name="domain" value="{{!empty($settings->domain) ? $settings->domain : '' }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="title">Site Name</label>
+                                    <input type="text" class="form-control" id="title" autocomplete="off" placeholder="Site Name" name="sitename" value="{{!empty($settings->sitename) ? $settings->sitename : '' }}">
+                                </div>
+                                <div class="form-group">
                                     <label for="title">Title</label>
                                     <input type="text" class="form-control" id="title" autocomplete="off" placeholder="Title" name="title" value="{{!empty($settings->title) ? $settings->title : '' }}">
                                 </div>
@@ -32,7 +40,11 @@
                                     <textarea class="form-control" id="keywords" rows="5" name="keywords">{{!empty($settings->keywords) ? $settings->keywords : '' }}</textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label>Image</label>
+                                    <label>Image 
+                                        @if(!empty($settings->image))
+                                        <a type="button" class="" data-toggle="modal" data-target=".bd-example-modal-xl">{{!empty($settings->image) ? "Show Logo" : '' }}</a>
+                                        @endif
+                                    </label>
                                     <input type="file" name="logo" class="file-upload-default">
                                     <div class="input-group col-xs-12">
                                         <input type="text" class="form-control file-upload-info" disabled="" placeholder="Upload Image">
@@ -85,6 +97,13 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <img src="{{!empty($settings->image) ? url($settings->image) : '' }}" alt="" width="100%">
+            </div>
+        </div>
         </div>
 
         @include('particles/common/footer')

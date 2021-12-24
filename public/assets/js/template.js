@@ -200,13 +200,20 @@
         return false;
     });
 
-    $(".allCategories option").click(function(){
+    $(".allCategories option").dblclick(function(){
       let id = $(this).data('id');
-      console.log(id);
       $('#selectedCategories-'+id).append("<option value='"+$(this).val()+"' selected>"+$(this).text()+"</option>");
     });
-    $(".selectedCategories option").click(function(){
+    $( document ).on( "dblclick", ".selectedCategories option", function() {
       $(this).remove();
+    });
+    $(".selectedCategories option").on("dblclick", function(){
+      $(this).remove();
+    });
+    $( "form" ).submit(function( event ) {
+      $(this).children('.selectedCategories').prop('selected', true);
+      //event.preventDefault();
+      $(this).submit();
     });
   });
 })(jQuery);

@@ -19,10 +19,14 @@
                                     <input type="text" class="form-control" id="title" autocomplete="off" placeholder="Category Name" name="title" value="{{!empty($category->title) ? $category->title : ''}}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Image</label>
+                                    <label>Image
+                                        @if(!empty($category->image))
+                                        <a type="button" class="" data-toggle="modal" data-target=".bd-example-modal-xl">{{!empty($category->image) ? "Show Logo" : '' }}</a>
+                                        @endif
+                                    </label>
                                     <input type="file" name="image" class="file-upload-default">
                                     <div class="input-group col-xs-12">
-                                        <input type="text" class="form-control file-upload-info" disabled="" placeholder="Upload Image" value="{{!empty($category->image) ? $category->image : ''}}">
+                                        <input type="text" class="form-control file-upload-info" disabled="" placeholder="Upload Image" value="">
                                         <span class="input-group-append">
                                             <button class="file-upload-browse btn btn-primary" type="button">Upload Image</button>
                                         </span>
@@ -41,6 +45,14 @@
                             </form>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <img src="{{!empty($category->image) ? url($category->image) : '' }}" alt="" width="100%">
                 </div>
             </div>
         </div>

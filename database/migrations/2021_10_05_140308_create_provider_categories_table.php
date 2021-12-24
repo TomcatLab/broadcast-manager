@@ -16,6 +16,7 @@ class CreateProviderCategoriesTable extends Migration
         Schema::create('provider_categories', function (Blueprint $table) {
             $table->id();
             $table->integer('provider')->nullable();
+            $table->string('key')->nullable();
             $table->integer('category')->nullable();
             $table->integer('count')->nullable();
             $table->string('feedurl')->nullable();

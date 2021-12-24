@@ -10,6 +10,7 @@ use App\Models\Categories;
 
 use Session;
 use DateTimeZone;
+//use Image;
 
 class SettingsController extends Controller
 {
@@ -39,18 +40,30 @@ class SettingsController extends Controller
     }
     public function generalSave(Request $request)
     {
+        if($request->logo){
+            $logoName = strtolower(str_replace(" ","_",$request->input('title')));
+            $logoFullPath = 'assets/images/site/'.$logoName.".".$request->logo->extension();
+            $logoNewName = $logoName.".".$request->logo->extension();
+            $request->logo->move(public_path('assets/images/site/'), $logoNewName);
+        }else{
+            $logoFullPath = null;
+        }
+
         $id = $request->input('id');
         if($id){
             $settings = Settings::where('id',$id)->first();
         }else{
             $settings = new Settings;
         }
+        $settings->domain = $request->input('domain');
+        $settings->sitename = $request->input('sitename');
         $settings->title = $request->input('title');
         $settings->description = $request->input('description');
         $settings->keywords = $request->input('keywords');
         $settings->canonical = $request->input('canonical');
         $settings->tagline = $request->input('tagline');
         $settings->timeformat = $request->input('timeformat');
+        if($logoFullPath) $settings->image = $logoFullPath;
         $settings->save();
 
         Session::flash('status', true);
@@ -79,6 +92,7 @@ class SettingsController extends Controller
         if($id){
             $menus = Menus::where('id',$id)->first();
             $menus->title = $request->input('title');
+            $menus->key =  strtolower(str_replace(" ","_",$request->input('title')));
             $menus->parent = $request->input('parent');
             $menus->location = $request->input('location');
             $categories = $request->input('selectedCategories');
@@ -90,6 +104,7 @@ class SettingsController extends Controller
         }else{
             $menus = new Menus;
             $menus->title = $request->input('title');
+            $menus->key =  strtolower(str_replace(" ","_",$request->input('title')));
             $menus->parent = $request->input('parent');
             $menus->location = $request->input('location');
         }

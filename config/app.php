@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FacadeServiceProvider::class,
         shweshi\OpenGraph\Providers\OpenGraphProvider::class,
+        Intervention\Image\ImageServiceProvider::class
     ],
 
     /*
@@ -233,6 +234,7 @@ return [
         'OpenGraph' => shweshi\OpenGraph\Facades\OpenGraphFacade::class,
         'Bbc'=> App\Facades\Bbc::class,
         'Cnn'=> App\Facades\Cnn::class,
+        'Image' => Intervention\Image\Facades\Image::class
     ],
 
 ];

@@ -16,6 +16,8 @@ class SettingsSeeder extends Seeder
     {
         //
         DB::table('settings')->insert([
+            "domain" => "",
+            "sitename" => "",
             "title" => "",
             "description" => "",
             "keywords" => "",

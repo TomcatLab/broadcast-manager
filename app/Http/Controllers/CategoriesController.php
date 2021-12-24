@@ -41,14 +41,13 @@ class CategoriesController extends Controller
     }
     public function save($id = null, Request $request)
     {
-        if($request->input('image')){
-            $request->validate([
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
-            $image = time().'.'.$request->image->extension();
-            $request->image->move(public_path('assets/images/categories/'), $image);    
+        if($request->image){
+            $imageName = strtolower(str_replace(" ","_",$request->input('title')));
+            $imageFullPath = 'assets/images/site/categories/'.$imageName.".".$request->image->extension();
+            $imageNewName = $imageName.".".$request->image->extension();
+            $request->image->move(public_path('assets/images/site/categories/'), $imageNewName);
         }else{
-            $image = null;
+            $imageFullPath = null;
         }
         if($id){
             $categories = Categories::where('id',$id)->first();
@@ -56,9 +55,11 @@ class CategoriesController extends Controller
             $categories = new Categories;
         }
         $categories->title = $request->input('title');
+        $categories->key = strtolower(str_replace(" ","_",$request->input('title')));
         $categories->keywords = $request->input('keywords');
         $categories->description = $request->input('description');
-        $categories->image = $request->input('image');
+        if($imageFullPath)
+            $categories->image = $imageFullPath;
         $categories->save();
 
         Session::flash('status', true);
