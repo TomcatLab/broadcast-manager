@@ -18,8 +18,9 @@ class CreateCategoriesTable extends Migration
             $table->string('title');
             $table->string('key')->nullable();
             $table->string('image')->nullable();
-            $table->string('keywords')->nullable();
-            $table->string('description')->nullable();
+            $table->string('og_title')->nullable();
+            $table->string('og_keywords')->nullable();
+            $table->string('og_description')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

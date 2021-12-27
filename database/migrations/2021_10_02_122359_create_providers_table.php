@@ -22,8 +22,9 @@ class CreateProvidersTable extends Migration
             $table->string('logo')->nullable();
             $table->string('favicon')->nullable();
             $table->integer('country')->nullable();
-            $table->string('keywords')->nullable();
-            $table->string('description')->nullable();
+            $table->string('og_title')->nullable();
+            $table->string('og_keywords')->nullable();
+            $table->string('og_description')->nullable();
             $table->integer('status')->nullable();
             $table->timestamps();
             $table->softDeletes();

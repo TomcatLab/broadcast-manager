@@ -40,6 +40,18 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <label for="ogTitle">OG Title</label>
+                                    <input type="text" class="form-control" id="ogTitle" autocomplete="off" placeholder="OG Title" name="ogTitle" value="{{!empty($form->og_title) ? $form->og_title : '' }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="ogKeywords">OG Keywords</label>
+                                    <textarea class="form-control" id="ogKeywords" rows="5" name="ogKeywords">{{!empty($form->og_keywords) ? $form->og_keywords : '' }}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ogDescription">OG Description</label>
+                                    <textarea class="form-control" id="ogDescription" rows="5" name="ogDescription">{{!empty($form->og_description) ? $form->og_description : '' }}</textarea>
+                                </div>
                                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
                                 <button type="reset" class="btn btn-light">Cancel</button>
                             </form>
@@ -105,6 +117,22 @@
                                                             @endif
                                                             @endforeach
                                                         </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 mt-3">
+                                                    <div class="form-group">
+                                                        <label for="ogTitle">OG Title</label>
+                                                        <input type="text" class="form-control" id="ogTitle" autocomplete="off" placeholder="OG Title" name="ogTitle" value="{{!empty($menu->og_title) ? $menu->og_title : '' }}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="ogKeywords">OG Keywords</label>
+                                                        <textarea class="form-control" id="ogKeywords" rows="5" name="ogKeywords">{{!empty($menu->og_keywords) ? $menu->og_keywords : '' }}</textarea>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="ogDescription">OG Description</label>
+                                                        <textarea class="form-control" id="ogDescription" rows="5" name="ogDescription">{{!empty($menu->og_description) ? $menu->og_description : '' }}</textarea>
                                                     </div>
                                                 </div>
                                             </div>

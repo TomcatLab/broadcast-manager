@@ -79,8 +79,9 @@ class ProviderController extends Controller
         $providers->favicon = $request->input('favicon');
         $providers->country = $request->input('country');
         if($logoFullPath) $providers->logo = $logoFullPath ? $logoFullPath : null;
-        $providers->keywords = $request->input('keywords');
-        $providers->description = $request->input('description');
+        $providers->og_title = $request->input('ogTitle');
+        $providers->og_keywords = $request->input('ogKeywords');
+        $providers->og_description = $request->input('ogDescription');
        
         $providers->save();
 
@@ -146,8 +147,9 @@ class ProviderController extends Controller
         $categories->country = $request->input('country');
         if($imageFullPath)
             $categories->image = $imageFullPath ? $imageFullPath : null;
-        $categories->keywords = $request->input('keywords');
-        $categories->description = $request->input('description');
+        $categories->og_title = $request->input('ogTitle');
+        $categories->og_keywords = $request->input('ogKeywords');
+        $categories->og_description = $request->input('ogDescription');
         $categories->save();
 
         Session::flash('status', true);

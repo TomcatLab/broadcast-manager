@@ -13,7 +13,7 @@
                         <div class="card-body">
                             <h6 class="card-title">Provider Information</h6>
                             <form class="forms-sample" method="POST" enctype="multipart/form-data">
-                                 @csrf
+                                @csrf
                                 <div class="form-group">
                                     <label for="title">Title</label>
                                     <input type="text" class="form-control" id="title" autocomplete="off" placeholder="Title" name="title" value="{{!empty($form->title) ? $form->title : '' }}">
@@ -60,12 +60,16 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="keywords">Keywords</label>
-                                    <textarea class="form-control" id="keywords" rows="5" name="keywords">{{!empty($form->keywords) ? $form->keywords : '' }}</textarea>
+                                    <label for="ogTitle">OG Title</label>
+                                    <input type="text" class="form-control" id="ogTitle" autocomplete="off" placeholder="OG Title" name="ogTitle" value="{{!empty($form->og_title) ? $form->og_title : '' }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="description">Description</label>
-                                    <textarea class="form-control" id="description" rows="5" name="description">{{!empty($form->description) ? $form->description : '' }}</textarea>
+                                    <label for="ogKeywords">OG Keywords</label>
+                                    <textarea class="form-control" id="ogKeywords" rows="5" name="ogKeywords">{{!empty($form->og_keywords) ? $form->og_keywords : '' }}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ogDescription">OG Description</label>
+                                    <textarea class="form-control" id="ogDescription" rows="5" name="ogDescription">{{!empty($form->og_description) ? $form->og_description : '' }}</textarea>
                                 </div>                          
                                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
                                 <button class="btn btn-light">Cancel</button>

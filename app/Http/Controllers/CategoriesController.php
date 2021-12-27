@@ -56,8 +56,9 @@ class CategoriesController extends Controller
         }
         $categories->title = $request->input('title');
         $categories->key = strtolower(str_replace(" ","_",$request->input('title')));
-        $categories->keywords = $request->input('keywords');
-        $categories->description = $request->input('description');
+        $categories->og_title = $request->input('ogTitle');
+        $categories->og_keywords = $request->input('ogKeywords');
+        $categories->og_description = $request->input('ogDescription');
         if($imageFullPath)
             $categories->image = $imageFullPath;
         $categories->save();

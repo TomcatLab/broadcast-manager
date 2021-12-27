@@ -202,9 +202,9 @@
           </a>
           <div class="submenu">
             <ul class="submenu-item">
-              <li class="category-heading">Providers</li>
-              <li class="nav-item"><a class="nav-link" href="{{url('cron/status')}}">Cron Status</a></li>
-              <li class="nav-item"><a class="nav-link" href="{{url('cron')}}">Cron</a></li>
+              <li class="category-heading">Cron</li>
+              <li class="nav-item"><a class="nav-link" href="{{url('cron/status')}}">Status</a></li>
+              <li class="nav-item"><a class="nav-link" href="{{url('cron')}}">Run</a></li>
             </ul>
           </div>
         </li>        

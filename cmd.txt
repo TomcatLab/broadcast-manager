@@ -25,6 +25,7 @@ php artisan make:migration create_country_table
 php artisan make:migration create_menus_table
 php artisan make:migration create_settings_table
 
+php artisan migrate:refresh --path=database/migrations/2021_10_02_122359_create_providers_table.php
 php artisan migrate:refresh --path=database/migrations/2021_10_23_170624_create_posts_table.php
 php artisan migrate:refresh --path=database/migrations/2021_10_26_085331_create_country_table.php
 php artisan migrate:refresh --path=database/migrations/2021_10_26_085331_create_country_table.php

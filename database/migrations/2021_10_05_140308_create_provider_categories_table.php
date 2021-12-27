@@ -22,8 +22,9 @@ class CreateProviderCategoriesTable extends Migration
             $table->string('feedurl')->nullable();
             $table->integer('country')->nullable();
             $table->string('image')->nullable();
-            $table->string('keywords')->nullable();
-            $table->string('description')->nullable();
+            $table->string('og_title')->nullable();
+            $table->string('og_keywords')->nullable();
+            $table->string('og_description')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

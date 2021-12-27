@@ -95,6 +95,9 @@ class SettingsController extends Controller
             $menus->key =  strtolower(str_replace(" ","_",$request->input('title')));
             $menus->parent = $request->input('parent');
             $menus->location = $request->input('location');
+            $menus->og_title = $request->input('ogTitle');
+            $menus->og_description = $request->input('ogDescription');
+            $menus->og_keywords = $request->input('ogKeywords');
             $categories = $request->input('selectedCategories');
 
             for ($i=0; $i <= $limit; $i++) { 
@@ -107,6 +110,9 @@ class SettingsController extends Controller
             $menus->key =  strtolower(str_replace(" ","_",$request->input('title')));
             $menus->parent = $request->input('parent');
             $menus->location = $request->input('location');
+            $menus->og_title = $request->input('ogTitle');
+            $menus->og_description = $request->input('ogDescription');
+            $menus->og_keywords = $request->input('ogKeywords');
         }
         $menus->save();
 
