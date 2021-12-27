@@ -6,6 +6,7 @@ use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CronController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\PostsController;
 
 
 /*
@@ -21,6 +22,7 @@ use App\Http\Controllers\SettingsController;
 
 Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 Route::get('/home', [HomeController::class, 'index'])->name('dashboard');
+Route::get('/posts', [PostsController::class, 'index'])->name('posts');
 Route::get('/cron/status', [HomeController::class, 'status'])->name('crone-status');
 
 Route::get('/providers', [ProviderController::class, 'index'])->name('providers');

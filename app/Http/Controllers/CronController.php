@@ -40,7 +40,7 @@ class CronController extends Controller
         $this->data['count'] = $this->tasks->get()->count();
         $this->data['tasks'] = [];
         
-        set_time_limit(1000);
+        set_time_limit(8000);
 
         if(!$this->data['count']){
             $this->data['providers'] =  $this->providers->where('status',1)->get();

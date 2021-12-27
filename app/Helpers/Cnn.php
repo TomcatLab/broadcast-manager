@@ -77,7 +77,7 @@ class Cnn
                     $image_width = isset($item['media:group']['media:content'][0]['@attributes']['width']) ? $item['media:group']['media:content'][0]['@attributes']['width'] : null;
                     $image_height = isset($item['media:group']['media:content'][0]['@attributes']['height']) ? $item['media:group']['media:content'][0]['@attributes']['height'] : null;
 
-                    $posts[$key] = [
+                    $post = [
                         'title' => $title,
                         'description' => $description,
                         'key' => $this->generateKey($title),
@@ -93,6 +93,9 @@ class Cnn
                         'created_at' => now(),
                         'updated_at' => now()
                     ];
+                    if($this->validatePost($post)){
+                        $posts[$key] = $post;
+                    }
                     // if(isset($item['media:group'])){
                     //     foreach ($item['media:group']['media:content'] as $content_value) {
                     //         $this->medias[$key][] = [
@@ -119,5 +122,22 @@ class Cnn
         $replace = ['_','_'];
         $key = strtolower(str_replace($search,$replace,$key));
         return preg_replace('/[^A-Za-z0-9\-_]/', '', $key);
+    }
+
+    private function validatePost($post = null)
+    {
+        if($post){
+            if($post['ext_link']){
+                if(strpos($post['ext_link'], "cnn") !== false){
+                    return true;
+                } else{
+                    return false;
+                }    
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
     }
 }

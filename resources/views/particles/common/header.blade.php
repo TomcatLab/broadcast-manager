@@ -189,12 +189,25 @@
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{url('cron/status')}}">
-            <i class="link-icon" data-feather="cast"></i>
-            <span class="menu-title">Cron Status</span>
+          <a class="nav-link" href="{{url('posts')}}">
+            <i class="link-icon" data-feather="airplay"></i>
+            <span class="menu-title">Posts</span>
           </a>
         </li>
-        
+        <li class="nav-item">
+          <a href="{{ url('cron/status') }}" class="nav-link">
+            <i class="link-icon" data-feather="cast"></i>
+            <span class="menu-title">Cron</span>
+            <i class="link-arrow"></i>
+          </a>
+          <div class="submenu">
+            <ul class="submenu-item">
+              <li class="category-heading">Providers</li>
+              <li class="nav-item"><a class="nav-link" href="{{url('cron/status')}}">Cron Status</a></li>
+              <li class="nav-item"><a class="nav-link" href="{{url('cron')}}">Cron</a></li>
+            </ul>
+          </div>
+        </li>        
       </ul>
     </div>
   </nav>
