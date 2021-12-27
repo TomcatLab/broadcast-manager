@@ -21,10 +21,12 @@ class CreatePostsTable extends Migration
             $table->integer('width')->nullable();
             $table->integer('height')->nullable();
             $table->string('pub_date')->nullable();
-            $table->longText('key')->nullable();
+            $table->string('key',300)->unique();
             $table->longText('link')->nullable();
             $table->longText('ext_link')->nullable();
-            $table->string('keywords')->nullable();
+            $table->longText('og_title')->nullable();
+            $table->longText('og_description')->nullable();
+            $table->string('og_keywords')->nullable();
             $table->boolean('og')->default(0);
             $table->integer('provider')->nullable();
             $table->integer('category')->nullable();

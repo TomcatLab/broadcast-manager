@@ -11,8 +11,6 @@ use App\Models\Posts;
 use App\Models\Medias;
 use Carbon\Carbon;
 
-use Bbc;
-
 class CronController extends Controller
 {
     public $data;
@@ -76,6 +74,7 @@ class CronController extends Controller
         //return $this->data;
         $this->data['crone'] = true;
         $this->data['tasks'] =  $this->tasks->orderBy('id', 'asc')->get();
+        //return $this->data['og'];
         return view('pages.cron.tasks', $this->data);
     }
     private function doTask()
@@ -92,16 +91,23 @@ class CronController extends Controller
                     //$this->data[$task->facade]['medias'] = $this->data[$task->facade]['medias'];
                     break;
                 case 'og':
-                    $this->data['post'] = $this->posts->where('og',0)->get();
-                    foreach ($this->data['post'] as $post) {
+                    $this->data['posts'] = $this->posts->where('og',0)->get();
+                    foreach ($this->data['posts'] as $post) {
                         $this->data['og'] = $task->facade::fetch($post->ext_link);
+                        $postUpdate = [
+                            "og_title" =>  $this->data['og']['title'] ? $this->data['og']['title'] : null,
+                            "og_description" => $this->data['og']['description'] ? $this->data['og']['description'] : null,
+                            "image" => $this->data['og']['image'] ? $this->data['og']['image'] : null,
+                            "og" => 1
+                        ];
+                        $this->updatePost($post->id, $postUpdate);
                         //break;
                         sleep(1);
                     }
                     Tasks::where('id',$task->id)->delete();
-                    if(!count($this->data['post'])){
-                        Tasks::where('id',$task->id)->delete();
-                    }
+                    // if(!count($this->data['post'])){
+                    //     Tasks::where('id',$task->id)->delete();
+                    // }
                     break;
                 default:
                     
@@ -119,7 +125,6 @@ class CronController extends Controller
         $facade = "OpenGraph";
         $this->setTask($description, $action, $facade);
     }
-
     private function setTask(
         $description = null,
         $action = null,
@@ -153,5 +158,13 @@ class CronController extends Controller
     private function setPosts($posts)
     {
         $this->posts->insertOrIgnore($posts);
+    }
+    public function updatePost($postId = null,$postUpdate = [])
+    {
+        $postUpdater = Posts::where('id',$postId)->first();
+        foreach ($postUpdate as $key => $value) {
+            $postUpdater->$key = $value;
+        }
+        $postUpdater->save();
     }
 }
