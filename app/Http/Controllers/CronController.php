@@ -18,7 +18,7 @@ class CronController extends Controller
     public $providers;
     public $providerCategories;
     public $posts;
-
+    public $mode = "cron";
     //
     public function __construct()
     {
@@ -33,11 +33,12 @@ class CronController extends Controller
         $this->posts = new Posts;
     }
 
-    public function index()
+    public function index($mode = "cron")
     {
         $this->data['count'] = $this->tasks->get()->count();
         $this->data['tasks'] = [];
-        
+        $this->setMode($mode);
+
         set_time_limit(8000);
 
         if(!$this->data['count']){
@@ -60,7 +61,7 @@ class CronController extends Controller
                         $facade = $provider->facade;
 
                         $this->setTask($description, $action, $facade, null, $param_1, $param_2, $param_3, $param_4);
-                        // $this->data['refresh'] = 1;
+                        //$this->data['refresh'] = 1;
                     }
                 }
                 if(!$this->tasks->where('action','og')->get()->count()){
@@ -72,7 +73,7 @@ class CronController extends Controller
            $this->doTask();
         }
         //return $this->data;
-        $this->data['crone'] = true;
+        $this->data['cron'] = true;
         $this->data['tasks'] =  $this->tasks->orderBy('id', 'asc')->get();
         //return $this->data['og'];
         return view('pages.cron.tasks', $this->data);
@@ -166,5 +167,9 @@ class CronController extends Controller
             $postUpdater->$key = $value;
         }
         $postUpdater->save();
+    }
+    private function setMode($mode = null)
+    {
+        # code...
     }
 }

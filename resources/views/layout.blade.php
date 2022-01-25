@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	@if(isset($refresh) && $refresh)	
 		<meta http-equiv="refresh" content="5">
-	@elseif(isset($crone))
+	@elseif(isset($cron))
 		<meta http-equiv="refresh" content="1800">
 	@endif
 	<title>NobleUI Responsive Bootstrap 4 Dashboard Template</title>

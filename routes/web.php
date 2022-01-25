@@ -58,6 +58,8 @@ Route::group(['namespace' => 'settings', 'prefix' => 'settings'], function(){
 });
 
 Route::get('/cron', [CronController::class, 'index'])->name('crone');
+Route::get('/cron/{mode}', [CronController::class, 'index'])->name('crone');
+
 
 Route::get('/test', function(){
     return Bbc::fetch();
