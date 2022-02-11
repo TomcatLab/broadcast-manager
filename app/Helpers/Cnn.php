@@ -81,7 +81,7 @@ class Cnn
                         'title' => $title,
                         'description' => $description,
                         'key' => $this->generateKey($title),
-                        'ext_link' => $item['guid']['@content'] ? $item['guid']['@content'] : "",
+                        'ext_link' => isset($item['guid']['@content']) ? $item['guid']['@content'] : "",
                         'pub_date' => isset($item['pubDate']) ? $item['pubDate'] : null,
                         'image' => $image_url,
                         'width' => $image_width,
